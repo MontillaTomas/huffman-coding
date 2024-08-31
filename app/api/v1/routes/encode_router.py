@@ -27,6 +27,8 @@ async def test(request: EncodeRequest,
         - **text**: The text to encode.
 
     Returns the encoded text and the encoding map.
+
+    Raises an Exception if the encoding algorithm is unknown.
     """
 
     return await service.encode(request.text, request.separate_syllables)

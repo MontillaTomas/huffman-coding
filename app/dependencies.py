@@ -7,6 +7,7 @@ from app.core.constants import Constants
 from app.services.encoder_service import EncoderService
 from app.services.decoder_service import DecoderService
 from app.schemas import EncodeRequest, DecodeRequest
+from .exceptions import InvalidAlgorithm
 
 ENCODERS = Constants.ENCODERS.value
 DECODERS = Constants.DECODERS.value
@@ -28,7 +29,7 @@ async def get_encoder_service(request: EncodeRequest) -> Encoder:
     algorithm = request.algorithm
 
     if algorithm not in ENCODERS:
-        raise ValueError(f"Unknown encoding algorithm: {algorithm}")
+        raise InvalidAlgorithm()
 
     return EncoderService(ENCODERS[algorithm])
 
@@ -49,6 +50,6 @@ async def get_decoder_service(request: DecodeRequest) -> Decoder:
     algorithm = request.algorithm
 
     if algorithm not in DECODERS:
-        raise ValueError(f"Unknown decoding algorithm: {algorithm}")
+        raise InvalidAlgorithm()
 
     return DecoderService(DECODERS[algorithm])
