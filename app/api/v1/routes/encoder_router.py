@@ -7,14 +7,14 @@ from app.dependencies import get_encoder_service
 from app.services.encoder_service import EncoderService
 from app.schemas import EncodeRequest, EncodeResponse
 
-encode_router = APIRouter(prefix="/encode", tags=["Encode"])
+encoder_router = APIRouter(prefix="/encoder", tags=["Encoder"])
 
 
-@encode_router.post("/",
-                    summary="Encode text",
-                    response_description="The encoded text and the encoding map",
-                    response_model=EncodeResponse,
-                    status_code=status.HTTP_200_OK)
+@encoder_router.post("/",
+                     summary="Encode text",
+                     response_description="The encoded text and the encoding map",
+                     response_model=EncodeResponse,
+                     status_code=status.HTTP_200_OK)
 async def test(request: EncodeRequest,
                service: Annotated[EncoderService, Depends(get_encoder_service)]):
     """
