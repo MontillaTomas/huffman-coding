@@ -32,3 +32,53 @@ class EncodingMap(BaseModel):
         map (dict[str, str]): The encoding map
     """
     map: dict[str, str]
+
+
+class EncodeRequest(BaseModel):
+    """
+    Represents the request to encode a text.
+
+    Attributes:
+        algorithm (str): The encoding algorithm to use. Default is "huffman"
+        separate_syllables (bool): Whether to separate syllables. Default is False
+        text (str): The text to encode
+    """
+    algorithm: str | None = "huffman"
+    separate_syllables: bool | None = False
+    text: str
+
+
+class EncodeResponse(BaseModel):
+    """
+    Represents the response of an encoding request.
+
+    Attributes:
+        encoding_map (dict[str, str]): The encoding map
+        encoded_symbols (list[str]): The encoded symbols
+    """
+    encoding_map: dict[str, str]
+    encoded_symbols: list[str]
+
+
+class DecodeRequest(BaseModel):
+    """
+    Represents the request to decode a text.
+
+    Attributes:
+        algorithm (str): The decoding algorithm to use. Default is "huffman"
+        encoded_text (str): The encoded text
+        encoding_map (dict[str, str]): The encoding map
+    """
+    algorithm: str | None = "huffman"
+    encoded_text: str
+    encoding_map: dict[str, str]
+
+
+class DecodeResponse(BaseModel):
+    """
+    Represents the response of a decoding request.
+
+    Attributes:
+        decoded_text (str): The decoded text
+    """
+    decoded_text: str
