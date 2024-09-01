@@ -76,5 +76,6 @@ class EncoderService:
 
         unenc_symbols = UnencodedSymbols(unencoded=unenc_symbols)
         enc_map, enc_symbols = self.encoder.encode(unenc_symbols)
+        enc_text = " ".join(enc_symbols.encoded)
 
-        return EncodeResponse(encoding_map=enc_map.map, encoded_symbols=enc_symbols.encoded)
+        return EncodeResponse(encoding_map=enc_map.map, encoded_text=enc_text)

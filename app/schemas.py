@@ -54,10 +54,10 @@ class EncodeResponse(BaseModel):
 
     Attributes:
         encoding_map (dict[str, str]): The encoding map
-        encoded_symbols (list[str]): The encoded symbols
+        encoded_text (str): The encoded text
     """
     encoding_map: dict[str, str]
-    encoded_symbols: list[str]
+    encoded_text: str
 
 
 class DecodeRequest(BaseModel):
