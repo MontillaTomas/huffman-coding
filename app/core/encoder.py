@@ -99,6 +99,9 @@ class HuffmanEncoder(Encoder):
         Returns:
             tuple[EncodingMap, EncodedSymbols]: The encoding map and the encoded symbols.
         """
+        if len(list_of_symbols.unencoded) == 0:
+            return EncodingMap(map={}), EncodedSymbols(encoded=[])
+
         nodes = self._calculate_frequencies(list_of_symbols)
         tree = self._build_huffman_tree(nodes)
         codes = self._huffman_code_tree(tree[0])
