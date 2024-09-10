@@ -1,0 +1,56 @@
+<div class="bg-base-100 flex-grow p-4">
+  <section
+    class="max-w-6xl mx-auto py-4 px-4 sm:px-6 rounded-xl border border-slate-400 shadow-xl"
+  >
+    <div class="flex flex-col gap-2">
+      <div class="w-full">
+        <label class="block text-base-content font-bold mb-2" for="text"
+          >Texto</label
+        >
+        <textarea
+          hx-post="/huffman-coding"
+          hx-trigger="input changed delay:500ms"
+          hx-target="#encoded-result"
+          name="text"
+          placeholder="Escribe aquí el texto a codificar"
+          rows="2"
+          class="textarea textarea-bordered textarea-md w-full text-base-content py-1 px-4 resize-none"
+        ></textarea>
+      </div>
+      <div id="encoded-result" class="w-full">
+        <div class="w-full">
+          <label
+            class="block text-base-content font-bold mb-2"
+            for="encoded-text"
+            >Texto Codificado</label
+          >
+          <textarea
+            id="encoded-text"
+            placeholder="Aquí se mostrará el texto codificado"
+            rows="3"
+            class="textarea textarea-bordered textarea-md w-full text-base-content py-1 px-4 resize-none bg-base-200"
+            readonly
+          ></textarea>
+        </div>
+        <div class="w-full">
+          <label
+            class="block text-base-content font-bold mb-2"
+            for="encoded-text"
+            >Tabla de Codificación</label
+          >
+          <div class="max-h-56 overflow-y-scroll">
+            <table class="table table-auto table-zebra-zebra">
+              <thead class="bg-base-300">
+                <tr>
+                  <th class="text-base-content">Símbolo</th>
+                  <th class="text-base-content">Código</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

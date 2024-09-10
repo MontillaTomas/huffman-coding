@@ -1,0 +1,37 @@
+<div class="w-full">
+  <label class="block text-base-content font-bold mb-2" for="encoded-text"
+    >Texto Codificado</label
+  >
+  <textarea
+    id="encoded-text"
+    placeholder="Aquí se mostrará el texto codificado"
+    rows="3"
+    class="textarea textarea-bordered textarea-md w-full text-base-content py-1 px-4 resize-none bg-base-200"
+    readonly
+  >
+{{ encoded_text if encoded_text else '' }}</textarea
+  >
+</div>
+<div class="w-full">
+  <label class="block text-base-content font-bold mb-2" for="encoded-text"
+    >Tabla de Codificación</label
+  >
+  <div class="max-h-56 overflow-y-scroll">
+    <table class="table table-auto table-zebra-zebra">
+      <thead class="bg-base-300">
+        <tr>
+          <th class="text-base-content">Símbolo</th>
+          <th class="text-base-content">Código</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for symbol, code in encoding_map.items() %}
+        <tr>
+          <td class="text-base-content">{{ symbol }}</td>
+          <td class="text-base-content">{{ code }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

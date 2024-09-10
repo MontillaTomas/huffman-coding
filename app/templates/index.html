@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{url_for('static',path='css/app.css')}}" />
+    <title>Codificación de Huffman</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{url_for('static',path='images/binary-tree.svg')}}"
+    />
+    <script src="{{url_for('static', path='js/htmx.min.js')}}"></script>
+  </head>
+  <body>
+    <div class="flex flex-col h-screen">
+      {% include "navbar.html" %} {% include "content.html" %}{% include
+      "footer.html" %}
+    </div>
+  </body>
+</html>
