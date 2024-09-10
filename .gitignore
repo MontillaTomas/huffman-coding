@@ -6,3 +6,11 @@ __pycache__/
 
 # Environment
 venv/
+
+# Node
+node_modules/
+package-lock.json
+
+# Generated CSS and JS
+app/static/css/app.css
+app/static/js/htmx.min.js
