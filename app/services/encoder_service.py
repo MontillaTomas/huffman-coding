@@ -57,7 +57,7 @@ class EncoderService:
         """
         return list(text)
 
-    async def encode(self, text: str, separate_syllables: bool):
+    async def encode(self, text: str, separate_syllables: bool) -> EncodeResponse:
         """
         Encode the text.
 

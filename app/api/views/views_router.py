@@ -1,11 +1,12 @@
 """
 Module for the views router.
 """
-from typing import Optional
-import httpx
-from fastapi import APIRouter, Request, Form, status
+from typing import Optional, Annotated
+from fastapi import APIRouter, Request, Form, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from app.dependencies import get_huffman_enc_service
+from app.services.encoder_service import EncoderService
 
 views_router = APIRouter(prefix="", tags=["Views"])
 
@@ -21,24 +22,19 @@ async def read_root(request: Request):
 
 
 @views_router.post("/huffman-coding", response_class=HTMLResponse)
-async def huffman_coding(request: Request, text: Optional[str] = Form(None)):
+async def huffman_coding(request: Request,
+                         service: Annotated[EncoderService, Depends(get_huffman_enc_service)],
+                         text: Optional[str] = Form(None)):
     """
     Returns the result of the Huffman coding algorithm.
     """
     if not text:
         text = ""
 
-    async with httpx.AsyncClient() as client:
-        response = await client.post("http://localhost:80/v1/encoder/", json={"text": text})
-
-    if response.status_code != status.HTTP_200_OK:
-        encoded_text = "An error occurred"
-        encoding_map = {}
-    else:
-        encoded_text = response.json()["encoded_text"]
-        encoding_map = response.json()["encoding_map"]
+    enc_response = await service.encode(text, False)
 
     return templates.TemplateResponse(
         request=request,
         name="huffman_coding_result.html",
-        context={"encoded_text": encoded_text, "encoding_map": encoding_map})
+        context={"encoded_text": enc_response.encoded_text,
+                 "encoding_map": enc_response.encoding_map})

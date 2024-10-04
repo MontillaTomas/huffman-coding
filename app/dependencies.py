@@ -34,6 +34,16 @@ async def get_encoder_service(request: EncodeRequest) -> Encoder:
     return EncoderService(ENCODERS[algorithm])
 
 
+async def get_huffman_enc_service() -> Encoder:
+    """
+    Return the encoder service for the Huffman algorithm.
+
+    Returns:
+        Encoder: The encoder service for the Huffman algorithm.
+    """
+    return EncoderService(ENCODERS["huffman"])
+
+
 async def get_decoder_service(request: DecodeRequest) -> Decoder:
     """
     Return the decoder service based on the request.
