@@ -24,14 +24,15 @@ async def read_root(request: Request):
 @views_router.post("/huffman-coding", response_class=HTMLResponse)
 async def huffman_coding(request: Request,
                          service: Annotated[EncoderService, Depends(get_huffman_enc_service)],
-                         text: Optional[str] = Form(None)):
+                         text: Optional[str] = Form(None),
+                         separate_syllables: bool = Form(False, alias="separate-syllables")):
     """
     Returns the result of the Huffman coding algorithm.
     """
     if not text:
         text = ""
 
-    enc_response = await service.encode(text, False)
+    enc_response = await service.encode(text, separate_syllables)
 
     return templates.TemplateResponse(
         request=request,
