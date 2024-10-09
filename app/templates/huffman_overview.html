@@ -1,0 +1,63 @@
+<section
+  class="max-w-6xl mx-auto mt-4 mb-0 py-4 px-4 sm:px-6 border-t border-slate-400"
+>
+  <div class="flex justify-center text-xl font-bold max-w-full">
+    ¿Qué es la Codificación de Huffman?
+  </div>
+  <div class="flex flex-col gap-4 mt-4 text-base">
+    <p>
+      La codificación de Huffman es una técnica de compresión de datos sin
+      pérdida, desarrollada por David Huffman. Se utiliza para reducir el tamaño
+      de los datos, sin perder ningún detalle o información. Este método es
+      particularmente útil cuando hay caracteres que se repiten con frecuencia
+      en los datos, ya que asigna códigos de longitud variable a los caracteres
+      de entrada, basándose en la frecuencia de aparición de cada uno.
+    </p>
+    <p>
+      En lugar de utilizar una codificación ingenua (donde cada símbolo recibe
+      un código de la misma longitud), la codificación de Huffman asigna códigos
+      más cortos a los caracteres que ocurren con mayor frecuencia y códigos más
+      largos a los que aparecen con menos frecuencia. Esto asegura una mayor
+      eficiencia en la compresión.
+    </p>
+  </div>
+  <div class="flex justify-center text-xl mt-4 font-bold max-w-full">
+    ¿Cómo funciona?
+  </div>
+  <div class="flex flex-col gap-4 mt-4 text-base">
+    <p>
+      Para determinar cómo asignar los códigos a cada símbolo, se deben seguir
+      los siguientes pasos:
+    </p>
+    <ol class="list-inside list-decimal space-y-4">
+      <li>
+        <span class="font-semibold">
+          Analizar la frecuencia de cada carácter:
+        </span>
+        Contamos cuántas veces aparece cada símbolo en el conjunto de datos.
+      </li>
+      <li>
+        <span class="font-semibold">Construir el árbol binario:</span>
+        <ul class="list-inside list-disc space-y-2 ps-4 mt-2">
+          <li>Tomamos el par de nodos con la frecuencia más baja.</li>
+          <li>
+            Repetimos este proceso hasta que solo quede un nodo en la
+            estructura.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class="font-semibold">Etiquetar los bordes del árbol:</span>
+        Comenzando desde la raíz, asignamos un 1 al borde que conduce al hijo
+        izquierdo y un 0 al borde que conduce al hijo derecho. Hacemos esto para
+        cada uno de los hijos.
+      </li>
+      <li>
+        <span class="font-semibold">Generar los códigos:</span> Recorremos el
+        árbol desde cada hoja hasta la raíz, anotando los números binarios
+        etiquetados a lo largo del camino para crear la palabra de código de
+        cada símbolo.
+      </li>
+    </ol>
+  </div>
+</section>
