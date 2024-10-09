@@ -10,6 +10,10 @@
 - 🌐 [**htmx**](https://htmx.org) para la interactividad del frontend sin necesidad de JavaScript complejo.
 - 🐋 [**Docker**](https://www.docker.com) para desplegar la aplicación.
 
+## Prueba la Aplicación
+
+Puedes probar la aplicación visitando la siguiente URL: [https://huffman-coding.onrender.com/](https://huffman-coding.onrender.com/)
+
 ## Ejecución de la Aplicación
 
 Para ejecutar la aplicación, asegúrate de tener instalado [Docker](https://www.docker.com) en tu máquina.

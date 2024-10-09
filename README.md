@@ -10,6 +10,10 @@
 - 🌐 [**htmx**](https://htmx.org) for frontend interactivity without complex JavaScript.
 - 🐋 [**Docker**](https://www.docker.com) for deploying the application.
 
+## Try it out
+
+You can try out the application by visiting the following URL: [https://huffman-coding.onrender.com/](https://huffman-coding.onrender.com/)
+
 ## Running the Application
 
 To run the application, make sure you have [Docker](https://www.docker.com) installed on your machine.
