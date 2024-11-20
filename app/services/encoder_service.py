@@ -57,7 +57,7 @@ class EncoderService:
         """
         return list(text)
 
-    async def encode(self, text: str, separate_syllables: bool) -> EncodeResponse:
+    async def encode(self, text: str, separate_syllables: bool, use_spanish_frequencies: bool) -> EncodeResponse:
         """
         Encode the text.
 
@@ -68,14 +68,29 @@ class EncoderService:
         Returns:
             EncodeResponse: The encoding map and the encoded symbols.
         """
-        if separate_syllables:
-            unenc_symbols = self._separate_into_syllables_and_special_chars(
-                text)
+        if use_spanish_frequencies:
+            text = text.upper()
+            text = text.replace('Á', 'A')
+            text = text.replace('É', 'E')
+            text = text.replace('Í', 'I')
+            text = text.replace('Ó', 'O')
+            text = text.replace('Ú', 'U')
+            text = text.replace('Ü', 'U')
+            text = ''.join(e for e in text if e.isalnum())
+            unenc_symbols = UnencodedSymbols(
+                unencoded=self._separate_into_chars(text))
+            enc_map, enc_symbols = self.encoder.encode_using_letter_frequency_in_spanish(
+                unenc_symbols)
+
         else:
-            unenc_symbols = self._separate_into_chars(text)
+            if separate_syllables:
+                unenc_symbols = self._separate_into_syllables_and_special_chars(
+                    text)
+            else:
+                unenc_symbols = self._separate_into_chars(text)
 
-        unenc_symbols = UnencodedSymbols(unencoded=unenc_symbols)
-        enc_map, enc_symbols = self.encoder.encode(unenc_symbols)
+            unenc_symbols = UnencodedSymbols(unencoded=unenc_symbols)
+            enc_map, enc_symbols = self.encoder.encode(unenc_symbols)
+
         enc_text = " ".join(enc_symbols.encoded)
-
         return EncodeResponse(encoding_map=enc_map.map, encoded_text=enc_text)

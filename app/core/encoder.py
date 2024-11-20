@@ -5,6 +5,7 @@ for encoding symbols using Huffman coding.
 from abc import ABC, abstractmethod
 from app.schemas import UnencodedSymbols, EncodedSymbols, EncodingMap
 from .node_tree import NodeTree
+from app.core.constants import Constants
 
 
 class Encoder(ABC):
@@ -69,6 +70,15 @@ class HuffmanEncoder(Encoder):
                 frequencies[symbol] = 1
         return sorted(frequencies.items(), key=lambda x: x[1], reverse=True)
 
+    def _get_letter_frequency_in_spanish(self):
+        """
+        Retrieves the frequency of letters in Spanish.
+
+        Returns:
+            list: A list of tuples containing the letters and their frequencies.
+        """
+        return sorted(Constants.LETTERS_FREQ_IN_SPANISH.value.items(), key=lambda x: x[1], reverse=True)
+
     def _build_huffman_tree(self, nodes):
         """
         Builds a Huffman tree from the list of nodes.
@@ -103,6 +113,22 @@ class HuffmanEncoder(Encoder):
             return EncodingMap(map={}), EncodedSymbols(encoded=[])
 
         nodes = self._calculate_frequencies(list_of_symbols)
+        tree = self._build_huffman_tree(nodes)
+        codes = self._huffman_code_tree(tree[0])
+        enc_symbols = [codes[symbol] for symbol in list_of_symbols.unencoded]
+        return EncodingMap(map=codes), EncodedSymbols(encoded=enc_symbols)
+
+    def encode_using_letter_frequency_in_spanish(self, list_of_symbols: UnencodedSymbols) -> tuple[EncodingMap, EncodedSymbols]:
+        """
+        Encodes a list of symbols using the Huffman coding algorithm with the letter frequency in Spanish.
+
+        Args:
+            list_of_symbols (UnencodedSymbols): The list of symbols to encode.
+
+        Returns:
+            tuple[EncodingMap, EncodedSymbols]: The encoding map and the encoded symbols.
+        """
+        nodes = self._get_letter_frequency_in_spanish()
         tree = self._build_huffman_tree(nodes)
         codes = self._huffman_code_tree(tree[0])
         enc_symbols = [codes[symbol] for symbol in list_of_symbols.unencoded]

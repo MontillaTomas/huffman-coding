@@ -9,8 +9,8 @@ from app.services.decoder_service import DecoderService
 from app.schemas import EncodeRequest, DecodeRequest
 from .exceptions import InvalidAlgorithm
 
-ENCODERS = Constants.ENCODERS.value
-DECODERS = Constants.DECODERS.value
+ENCODERS = Constants.get_encoders()
+DECODERS = Constants.get_decoders()
 
 
 async def get_encoder_service(request: EncodeRequest) -> Encoder:

@@ -25,14 +25,16 @@ async def read_root(request: Request):
 async def huffman_coding(request: Request,
                          service: Annotated[EncoderService, Depends(get_huffman_enc_service)],
                          text: Optional[str] = Form(None),
-                         separate_syllables: bool = Form(False, alias="separate-syllables")):
+                         separate_syllables: bool = Form(
+                             False, alias="separate-syllables"),
+                         use_spanish_frequencies: bool = Form(False, alias="use-spanish-frequencies")):
     """
     Returns the result of the Huffman coding algorithm.
     """
     if not text:
         text = ""
 
-    enc_response = await service.encode(text, separate_syllables)
+    enc_response = await service.encode(text, separate_syllables, use_spanish_frequencies)
 
     return templates.TemplateResponse(
         request=request,
